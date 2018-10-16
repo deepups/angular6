@@ -1,0 +1,11 @@
+<section class="panel panel-success">
+  <div class="panel-heading">Two-way Binding</div>
+  <div class="panel-body">
+      <input (keyup)="onKey($event)" placeholder="Enter your city">
+
+      <h4>Output of keyup events: </h4>  <p>{{values}}</p>
+           <button class="btn btn-sm btn-primary pull-right"
+                (click)="reset()">Reset
+           </button>
+  </div>
+</section>

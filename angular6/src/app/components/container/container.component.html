@@ -1,0 +1,9 @@
+<div  [ngSwitch]="value">
+    <ng-container *ngSwitchCase="0">Line #1</ng-container>
+    <ng-container *ngSwitchCase="1">Line #2</ng-container>
+    <aside>
+         "ng-container" is a logical container that can be used to group nodes,
+         but is not rendered in the DOM tree as a node.
+         It is rendered as an HTML comment.
+    </aside>
+  </div>

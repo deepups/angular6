@@ -1,0 +1,48 @@
+<table class="table table-bordered table-striped table-hover">
+  <tr>
+    <td>Id</td>
+    <td>Product Code</td>
+    <td>Description</td>
+    <td>Price</td>
+    <td>Action</td>
+  </tr>
+  <tr *ngFor="let product of productsList;let i=index">
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.price}}</td>
+    <td>
+      <button (click)="editProduct(product)">Edit</button>
+      <button (click)="deleteProduct(i)">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<div for="add new product btn">
+  <button (click)="addNewProductForm()">Add New Product</button>
+</div>
+
+<div *ngIf="showAddProductForm" class="col-xs-4" style="width:40%;" for="add new product form">
+    <form>
+        <div class="form-group">
+          <label>ID</label>
+          <input class="form-control" [(ngModel)]="product.id" name="productId">
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" [(ngModel)]="product.name" name="productName">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" [(ngModel)]="product.description" name="productDescription">
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <input type="text" class="form-control" [(ngModel)]="product.price" name="productPrice">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Submit" (click)="updateProduct(product,i)">    
+          <input type="button" value="Cancel" (click)="clearTheForm()">    
+        </div>
+    </form>
+</div>

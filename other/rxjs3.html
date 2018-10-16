@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RxJS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.4.1/Rx.js"></script>
+    <style>
+        button {width: 12em;}
+    </style>
+</head>
+
+<body>
+        <aside>
+        See in console.
+        </aside><br>
+        <button>Click </button>
+
+        <script >
+
+            var button = document.querySelector('button');
+
+            var observer = {
+                next: function(value) {
+                   console.log("next: ", value);
+
+                },
+                error: function(err) {
+                     console.log("err: ",err);
+                },
+                complete: function() {
+                    console.log("completed");
+                }
+            };
+
+//  equiv to:  Rx.Observable.fromEvent(button, 'click')
+
+        var subscription = Rx.Observable.create(function (obs) {
+                button.onclick = function (evt) {
+                    obs.next("coord-X: " + evt.clientX);
+                }
+            })
+                .subscribe(observer);
+
+        setTimeout(function () {
+            console.log("timed out - unsubscribe().");
+            subscription.unsubscribe(); // prevents mem leak.
+        },7000);
+
+        </script>
+
+</body>
+</html>

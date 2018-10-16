@@ -1,0 +1,10 @@
+<h3>Use of form refs: </h3>
+<div>
+    <input #myInput1 placeholder="Enter your name"/>
+    <button (click)="myClick(myInput1.value)">Click</button>
+</div> <br />
+
+<div>
+    <input #myInput2 placeholder="Enter your name"/>
+    <button (mouseover)="myMouseover($event, myInput2.value)">Mouse Over</button>
+</div>

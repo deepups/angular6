@@ -1,0 +1,136 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-postit-container',
+  styles: [`
+    .notes {
+      padding-top: 50px;
+    }
+    .creator {
+      margin-bottom: 40px;
+    }
+  `],
+  template: `
+    <div class="row center-xs notes">
+
+      <div class="notes col-xs-8">
+        <div class="row between-xs">
+
+          <app-postit
+            class="col-xs-4"
+
+             *ngFor="let postit of stickies; let i = index;"
+                       [postit]="postit"
+                       (checked)="onPostitChecked($event, i)" >
+          </app-postit>
+
+        </div>
+      </div>
+    </div>
+  `
+})
+export class PostitContainerComponent {
+  public stickies = [
+     {category: 'Home', value: 'Pay the mobile bill.', color: 'lightseagreen'},
+     {category: 'Bank', value: 'Submit the declaration form.', color: 'lightgreen'},
+     {category: 'Home', value: 'Pay the electricity bill.', color: 'lightseagreen'},
+     {category: 'Office', value: 'Submit travel expense xls.', color: 'lightblue'},
+     {category: 'Office', value: 'It is coffee time.', color: 'lightblue'}
+
+   ];
+
+  onPostitChecked(evt: any, i: number) { const pInfo = this.stickies.splice(i, 1); }
+}
+
+
+************************************
+
+
+
+import {
+  Component, EventEmitter,
+  Input, Output,
+} from '@angular/core';
+
+
+class IPostit {
+  category: string;
+  value: string ;
+  color: string ;
+}
+
+
+
+@Component({
+  selector: 'app-postit',
+  styles: [`
+    .postit-card {
+      padding: 15px;
+      border-radius: 2px;
+      width: 100%;
+      position: relative;
+    }
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: left;
+      color: rgba(0,0,0,0.8);
+    }
+    .value {
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 200;
+    }
+    .icon {
+      position: absolute;
+      color: black;
+      border: 1px solid lightgrey;
+      background-color: orangered;
+      font-size: 2em;
+      top: -10px;
+      left: -10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      cursor: pointer;
+    }
+  `],
+  template: `
+    <div
+      class="postit-card row shadow-1"
+      [ngStyle]="{'background-color': postit.color}"
+      (mouseenter)="toggleCheck()"
+      (mouseleave)="toggleCheck()"
+    >
+      <div class="icon" *ngIf="showCheck" (click)="onChecked()">
+        <i class="material-icons">check</i>
+      </div>
+      <div class="col-xs-12 title">
+        {{ postit.category }}
+      </div>
+      <div class="col-xs-12 value">
+        {{ postit.value }}
+      </div>
+    </div>
+  `
+})
+export class PostitComponent {
+  showCheck = false;
+
+
+  @Input() postit: IPostit = null;
+  @Output() checked = new EventEmitter();
+
+  onChecked() {
+                console.log('postit clicked');
+
+                this.checked.emit(this.postit);
+    }
+
+  toggleCheck() {
+                    this.showCheck = !this.showCheck;
+   }
+
+}
+
+stick

@@ -1,0 +1,6 @@
+<div class="container">
+      <app-stickie *ngFor="let stickie of stickies; let i = index;" 
+          [stickie]="stickie"
+          (checked)="onStickietChecked($event, i)">
+      </app-stickie>
+</div>  

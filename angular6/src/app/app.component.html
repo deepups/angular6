@@ -1,0 +1,74 @@
+<!-- <app-class></app-class>
+
+<app-model></app-model>
+
+<app-listview></app-listview> 
+
+<app-forget></app-forget>
+
+<app-kfc></app-kfc>
+
+<app-user-info></app-user-info>
+
+<app-repo-user></app-repo-user>
+
+<app-mypipe></app-mypipe>-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a routerLink="news" class="nav-link">News</a>
+            </li>
+            <li class="nav-item active">
+                <a routerLink="market" class="nav-link">Market</a>
+            </li>
+            <li class="nav-item active">
+                <a routerLink="tools" class="nav-link">Tools</a>
+            </li>
+            <li class="nav-item active">
+                <a routerLink="repoUser" class="nav-link">Repo-User</a>
+            </li>
+            <li class="nav-item active">
+                <a routerLink="products" class="nav-link">Products</a>
+            </li>
+            <li class="nav-item active">
+                <a routerLink="forms" class="nav-link">Forms</a>
+            </li>
+        </ul>
+    </div>  
+</nav>
+<br />
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+
+<app-container></app-container>
+
+<app-category-sender></app-category-sender>
+<app-product-receiver></app-product-receiver>
+<!-- 
+        <div *ngIf="todos" *ngFor="let todo of todos">
+        {{ todo.content }}
+        Invalid: as two structural directives should not be on a single element
+        ------------------------------------------------------------------------
+
+        so the solution would be 
+        <div *ngIf="todos">
+            <div *ngFor="let todo of todos">
+                {{ todo.content }}
+            </div>
+        </div>
+        ------------------------------------------------------------------------
+    
+        This will take time to load on the DOM
+        SO ultimate angular solution is
+        <ng-container *ngIf="todos">
+            <div *ngFor="let todo of todos">
+                {{ todo.content }}
+            </div>
+        </ng-container>
+        ngcontainer won't create any element on the DOM
+        
+ -->

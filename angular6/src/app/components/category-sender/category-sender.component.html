@@ -1,0 +1,19 @@
+<div class="container">
+    <h3>Category List </h3>
+    <div class="msg">Click on any row of this table</div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <td>Category Id</td>
+          <td>Category Name</td>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let c of cats" (click)="getSelectedCategory(c)">
+          <td>{{c.CatId}}</td>
+          <td>{{c.CatName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

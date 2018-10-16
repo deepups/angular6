@@ -1,0 +1,33 @@
+<form #myform="ngForm"  ngNativeValidate (ngSubmit)="submit(myform.value)">
+    <div>
+      <label>Firstname:</label>
+      <input  name="firstname" ngModel="person.firstname" required>
+    </div>
+    <div>
+      <label>Lastname:</label>
+      <input  name="lastname" ngModel minlength="3" required>
+    </div>
+    <div>
+      <label>Street:</label>
+      <input  name="street" ngModel minlength="3">
+    </div>
+    <div>
+      <label>Pin:</label>
+      <input  name="pin" ngModel pattern="[1-9]{6}">
+    </div>
+    <div>
+      <label>City:</label>
+      <input  name="city" ngModel maxlength="10">
+    </div><br>
+  
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+  <hr>
+  
+  <h5>Debug Info: </h5>
+  <pre>{{myform.value | json}}    </pre>
+  
+  <h4>Submitted: </h4>
+  <pre> {{value | json }}  </pre>
+
+ 

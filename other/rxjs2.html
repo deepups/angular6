@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RxJS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.4.1/Rx.js"></script>
+    <style>
+        button {width: 12em;}
+    </style>
+</head>
+
+<body>
+<aside>
+    See in console.
+</aside><br>
+
+<script >
+
+    var observer = {
+        next: function(value) {
+            console.log("next: ", value);
+
+        },
+        error: function(err) {
+            console.log("err: ",err);
+        },
+        complete: function() {
+            console.log("completed");
+        }
+    };
+
+
+    // ----------- creating a Obs (but sync in nature, since executes imm.) -------
+    Rx.Observable.create(function (obs) {
+        obs.next("My val1a");
+        obs.next("My val2a");
+
+        obs.error("My Error"); // obs is terminated now, since error.
+        obs.next("My val3a"); // so, not emitted.
+    })
+        .subscribe(observer);
+    // --------------------------------------------------
+
+    Rx.Observable.create(function (obs) {
+        obs.next("My val1b");
+        obs.next("My val2b");
+
+        obs.complete(); // obs is terminated now, since completed.
+        obs.next("My val3b"); // so, not emitted.
+    })
+        .subscribe(observer);
+
+</script>
+
+</body>
+</html>

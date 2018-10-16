@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RxJS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.4.1/Rx.js"></script>
+    <style>
+        button {width: 8em;}
+    </style>
+</head>
+
+<body>
+        <aside>
+     
+            Move the cursor on the button, and see the x-coord in console.
+        </aside><br>
+        <button>Click </button>
+
+        <script >
+            var button = document.querySelector('button');
+
+            Rx.Observable.fromEvent(button, 'click')
+                .subscribe(
+                    function (value){console.log(value.clientX);}
+            );
+        </script>
+
+</body>
+</html>

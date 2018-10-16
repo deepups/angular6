@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RxJS</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.4.1/Rx.min.js"></script>
+    <style>
+        button {width: 12em;}
+    </style>
+</head>
+
+<body>
+        <aside>
+        Move the cursor on the button, and see the x-coord in console.
+        </aside><br>
+        <button>Click </button>
+
+        <script >
+            var button = document.querySelector('button');
+
+            var observer = {
+                next: function(value) {
+                  //  console.log("next: ", value);
+                    console.log("next: ", value.clientX,  value.clientY);
+                },
+                error: function(err) {
+                    // this won't get called in this particular case.
+                    console.log("err: ",err);
+                },
+                complete: function() { // this fn takes no arg.
+                    // this won't get called in this particular case.
+                    console.log("completed");
+                }
+            };
+
+            Rx.Observable.fromEvent(button, 'click').subscribe(observer);
+
+        </script>
+
+</body>
+</html>

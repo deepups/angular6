@@ -1,0 +1,112 @@
+parent 
+=============
+
+<div style="border:1px solid black;padding:10px;margin:10px;">
+  <h3>parents message to child:{{msg}}</h3>
+  <app-child1 [childmessage]="msg"></app-child1>
+  <h3>message from child 2:{{childmessage}}</h3>
+  <app-child2 (childTwoMessge)='displayMessage($event)'></app-child2>
+</div>
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent  {
+
+  msg = 'eat healthy';
+  childmessage;
+
+  displayMessage(data){
+    this.childmessage = data;
+  }
+
+}
+
+
+child 1
+===========
+
+<div style="border:1px solid red;width:300px;height:200px;margin:5px;padding:5px;">
+<h3>Child 1</h3>
+<p>parent message:<span style="font-size:20px;font-weight: bold;">{{childmessage}}</span></p>
+<p>counter:<span style="font-size:20px;font-weight: bold;">{{demo.counter}}</span></p>
+</div>
+
+import { Component, OnInit, Input } from '@angular/core';
+import { ParentingService } from '../../services/parenting.service';
+
+@Component({
+  selector: 'app-child1',
+  templateUrl: './child1.component.html',
+  styleUrls: ['./child1.component.css']
+})
+export class Child1Component {
+
+  @Input() childmessage: any;
+
+  constructor(private demo: ParentingService) {
+    
+  }
+
+}
+
+
+child 2
+================
+
+<div style="border:1px solid red;width:300px;height:200px;margin:5px;padding:5px;">
+    <h3>Child 2</h3>
+    <button style="padding:5px;margin:2px;" (click)="sendMessageToParent()">send message to parent</button>
+    <button style="padding:5px;margin:2px;" (click)="incChild1Count()">increment child 1's counter</button>
+</div>
+
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ParentingService } from '../../services/parenting.service';
+
+@Component({
+  selector: 'app-child2',
+  templateUrl: './child2.component.html',
+  styleUrls: ['./child2.component.css']
+})
+export class Child2Component {
+
+  @Output() childTwoMessge = new EventEmitter();
+
+  sendMessageToParent(){
+    this.childTwoMessge.emit('I must study maths');
+  }
+
+  constructor(private demo: ParentingService) {
+    
+  }
+
+  incChild1Count(){
+    this.demo.incCount();
+  }
+}
+
+
+service
+=============
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ParentingService {
+  counter = 0 ;
+  constructor() { }
+
+  incCount(){
+    this.counter++;
+  }
+}
+
+
+
+
